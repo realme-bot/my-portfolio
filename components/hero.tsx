@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, Variants, easeOut } from "framer-motion"
 
 interface HeroProps {
   setActiveSection: (section: string) => void
@@ -53,7 +53,8 @@ Forage Virtual Experience Programs: AWS, HPE, Tata (GenAI & Cybersecurity)`
     document.body.removeChild(element)
   }
 
-  const containerVariants = {
+  // Container variants with stagger
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -64,12 +65,16 @@ Forage Virtual Experience Programs: AWS, HPE, Tata (GenAI & Cybersecurity)`
     },
   }
 
-  const itemVariants = {
+  // Individual item variants
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
+      transition: {
+        duration: 0.8,
+        ease: easeOut, // ✅ TypeScript-safe
+      },
     },
   }
 
@@ -115,6 +120,7 @@ Forage Virtual Experience Programs: AWS, HPE, Tata (GenAI & Cybersecurity)`
           >
             View Projects <span>↓</span>
           </motion.button>
+
           <motion.button
             onClick={handleDownloadResume}
             className="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-all flex items-center justify-center gap-2"
